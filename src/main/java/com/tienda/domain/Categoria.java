@@ -2,6 +2,7 @@ package com.tienda.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -19,6 +20,11 @@ public class Categoria implements Serializable { //serializacion porque se va al
     private String descripcion;
     private String rutaImagen;
     private boolean activo;
+    
+    //Asociación con la tabla de productos//
+    @OneToMany // de categoria a productos es una relacion de uno a muchos, porque tenemos muchos productos.
+    @JoinColumn(name="id_categoria", updatable=false) //esta es la union con la tabla de productos (foreing key)
+    List<Producto>productos; // traemos lista de productos
 
     public Categoria() {
     }

@@ -28,7 +28,7 @@ public class CategoriaController {
         model.addAttribute("totalCategorias", categorias.size());
         return "/categoria/listado";
     }
-    
+
     @GetMapping("/nuevo")
     public String categoriaNuevo(Categoria categoria) {
         return "/categoria/modifica";
@@ -36,16 +36,16 @@ public class CategoriaController {
 
     @Autowired
     private FirebaseStorageServiceImpl firebaseStorageService;
-    
+
     @PostMapping("/guardar")
     public String categoriaGuardar(Categoria categoria,
-            @RequestParam("imagenFile") MultipartFile imagenFile) {        
+            @RequestParam("imagenFile") MultipartFile imagenFile) {
         if (!imagenFile.isEmpty()) {
             categoriaService.save(categoria);
             categoria.setRutaImagen(
                     firebaseStorageService.cargaImagen(
-                            imagenFile, 
-                            "categoria", 
+                            imagenFile,
+                            "categoria",
                             categoria.getIdCategoria()));
         }
         categoriaService.save(categoria);
@@ -58,7 +58,7 @@ public class CategoriaController {
         return "redirect:/categoria/listado";
     }
 
-    @GetMapping("/modificar/{idCategoria}")
+    @GetMapping("/modifica/{idCategoria}")
     public String categoriaModificar(Categoria categoria, Model model) {
         categoria = categoriaService.getCategoria(categoria);
         model.addAttribute("categoria", categoria);
