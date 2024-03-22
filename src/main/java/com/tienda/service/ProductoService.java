@@ -3,6 +3,7 @@ package com.tienda.service;
 import com.tienda.domain.Producto;
 import java.util.List;
 
+
 /**
  *
  * @author pherr
@@ -21,5 +22,10 @@ public interface ProductoService {
 
     // Se elimina el producto que tiene el id pasado por parámetro
     public void delete(Producto producto);
+    
+    //Primer filtro para la página(precio)
+    public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup);
+    
+    public List<Producto> metodoJPQL(double precioInf, double precioSup);
 
 }
